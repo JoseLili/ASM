@@ -59,9 +59,18 @@ EVACUACION_DURATION: int = 80     # Audio de evacuación
 # Tiempo máximo permitido antes de auto‑paro (watchdog) – >= mayor audio + margen
 WATCHDOG_TIMEOUT: int = 200       # Cortará cualquier audio que exceda este valor
 
+
+# ---------------------------------------------------------------------------
+# Duracion del mensaje en la pantalla LCD
+# ---------------------------------------------------------------------------
+
+BOOT_BANNER_SECONDS = 8      # bienvenida
+DIAG_RESULT_SECONDS = 4      # resultado diagnóstico
+
 # ---------------------------------------------------------------------------
 # Texto de bienvenida (Figlet o fallback ASCII)
 # ---------------------------------------------------------------------------
+
 VERSION: str = "2.23"
 AUTHOR: str = "BLTeech"
 WELCOME_TEMPLATE: str = (
