@@ -34,15 +34,25 @@ def main() -> None:
     estado_mgr = EstadoManager(Estado.DIAGNOSTICO)
     lcd = LCD()
     logger = Logger()
-
-    # Mostrar bienvenida
+    
+    # ── 1) Splash inicial ──────────────────────────────────────────────
     site_name = settings.SITE_FILE.read_text(encoding="utf-8").strip() or "SIN_SITIO"
-    lcd.mostrar_bienvenida(site_name)
-    time.sleep(1)
+    # muestra versión/aut​or + “Bienvenido”
+    lcd.mostrar_bienvenida("Bienvenido")
+    time.sleep(settings.BOOT_BANNER_SECONDS)
 
-    # Pasar a stand‑by
+    # ── 2) Pantalla estática de “sitio” y estado inicial ─────────────
+    lcd.limpiar()
+    # Línea 1: Sitio: Coyuya
+    line1 = f"Sitio: {site_name}"[: settings.LCD_COLS]
+    lcd.write_string(line1.ljust(settings.LCD_COLS))
+    lcd.crlf()
+    # Línea 2: Esperando evento...
+    line2 = f"{Estado.ESPERANDO.to_lcd()}..."[: settings.LCD_COLS]
+    lcd.write_string(line2.ljust(settings.LCD_COLS))
+
+    # Aviso interno / log inicial
     estado_mgr.set(Estado.ESPERANDO)
-    lcd.mostrar_estado(Estado.ESPERANDO)
 
     manejador = ManejadorEventos(
         estado_mgr=estado_mgr,

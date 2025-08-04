@@ -47,6 +47,20 @@ class LCD:
         with suppress(Exception):
             self._lcd.clear()
 
+    def clear(self) -> None:
+        """Alias para limpiar()."""
+        self.limpiar()
+
+    def write_string(self, texto: str) -> None:
+        """Alias a CharLCD.write_string()."""
+        with suppress(Exception):
+            self._lcd.write_string(texto)
+
+    def crlf(self) -> None:
+        """Alias a CharLCD.crlf()."""
+        with suppress(Exception):
+            self._lcd.crlf()
+
     def mostrar_bienvenida(self, sitio: str) -> None:
         """Muestra la versión, autor y nombre de sitio al arranque."""
         self.limpiar()
