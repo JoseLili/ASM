@@ -46,10 +46,10 @@ class Logger:
         handler.setFormatter(logging.Formatter("%(asctime)s,%(message)s", "%Y-%m-%dT%H:%M:%S"))
         self._logger.addHandler(handler)
 
-        # También a consola en DEBUG opcional
-        stream = logging.StreamHandler()
-        stream.setLevel(logging.DEBUG)
-        self._logger.addHandler(stream)
+        # Consola: sólo warnings y errores para no repetir logs INFO
+        console = logging.StreamHandler()
+        console.setLevel(logging.WARNING)
+        self._logger.addHandler(console)
 
     # ------------------------------------------------------------------
     def registrar(self, estado: Estado, detalle: str | None = "") -> None:
