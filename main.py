@@ -10,6 +10,10 @@ o bien desde un servicio **systemd** que apunte a este archivo usando el venv.
 """
 from __future__ import annotations
 
+from gpiozero import Device
+from gpiozero.pins.pigpio import PiGPIOFactory
+Device.pin_factory = PiGPIOFactory()
+
 import signal
 import sys
 import time

@@ -86,3 +86,26 @@ El sistema se configura para ejecutarse al encender la Raspberry Pi mediante un 
 
 ```bash
 sudo systemctl enable alsi.service
+
+
+gpiozero
+RPi.GPIO
+RPLCD
+smbus2
+pygame
+psutil
+pyfiglet
+pigpio
+
+
+para arreglar el GPIO instalamos https://github.com/joan2937/pigpio
+
+ffmpeg -y -i assets/sonidos/evacuacion.mp3 \
+  -codec:a libmp3lame -b:a 192k assets/sonidos/evacuacion_std.mp3
+
+ffmpeg -y -i assets/sonidos/simulacro.mp3 \
+  -codec:a libmp3lame -b:a 192k assets/sonidos/simulacro_std.mp3
+
+ffmpeg -y -i assets/sonidos/alerta_sismica.mp3 \
+  -codec:a libmp3lame -b:a 192k assets/sonidos/alerta_sismica_std.mp3
+

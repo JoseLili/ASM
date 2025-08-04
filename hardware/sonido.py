@@ -92,13 +92,24 @@ class AudioPlayer:
     def _build_command(self, file_path: Path) -> list[str]:
         """Arma la lista de argumentos según el reproductor seleccionado."""
         if self._player_cmd == "mpg123":
-            return [self._player_cmd, "-q", "--loop", "-1", str(file_path)]
+            # Forzar salida por el jack analógico de la Pi (hw:0,0)
+            return [
+                self._player_cmd,
+                "-q",
+                "--loop",
+                "-1",
+                "-a",
+                "hw:0,0",
+                str(file_path),
+            ]
         if self._player_cmd == "mpv":
+            # Forzar dispositivo ALSA plughw:0,0 para sonido analógico
             return [
                 self._player_cmd,
                 "--no-video",
                 "--quiet",
                 "--loop-file=inf",
+                "--audio-device=alsa/plughw:0,0",
                 str(file_path),
             ]
         # No debería llegar aquí
