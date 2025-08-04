@@ -12,7 +12,7 @@ import threading
 import time
 from enum import Enum, auto
 from typing import Callable, Optional
-
+from datetime import datetime
 from config import settings
 from config.estados import Estado
 from hardware import sonido
@@ -80,6 +80,10 @@ class ManejadorEventos:
                 ev = self._cola.get(timeout=0.5)
             except queue.Empty:
                 continue
+
+            # ── Log en terminal con timestamp ────────────────────────────
+            t = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(f"[{t}] Botón PRESIONADO: {ev.name}")
 
             if ev is _Evt.ALERTA:
                 self._transitar(Estado.ALERTA, sonido.play_alerta, settings.ALERTA_DURATION)
