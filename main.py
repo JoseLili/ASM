@@ -24,6 +24,7 @@ from hardware.lcd import LCD
 from logs.logger import Logger
 from logica.estado_actual import EstadoManager, Estado
 from logica.manejador_eventos import ManejadorEventos
+from logica.usb_watcher import USBWatcher
 
 # ---------------------------------------------------------------------------
 # Inicialización
@@ -61,6 +62,10 @@ def main() -> None:
     )
     manejador.start()
 
+
+    # ── Lanzar el USBWatcher para exportar logs al insertar USB ─────────
+    usb_watcher = USBWatcher(lcd)
+    usb_watcher.start()
     # ------------------------------------------------------------------
     # Señales para detener ordenadamente
     # ------------------------------------------------------------------
