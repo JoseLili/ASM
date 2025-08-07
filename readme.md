@@ -173,4 +173,7 @@ Conecta por SSH y verás tu banner ASCII antes del prompt.
   ```
 - **Reinicios**: `sudo reboot`.
 
+ssh blteech@192.168.137.50
+
+
 ---
