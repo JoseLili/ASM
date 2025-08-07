@@ -4,7 +4,7 @@ Envuelve la librería **RPLCD** para que el resto de módulos sólo llame a
 `mostrar_estado()` o `mostrar_bienvenida()` sin preocuparse por comandos low‑level.
 """
 from __future__ import annotations
-
+from config import settings
 import logging
 from contextlib import suppress
 from typing import Final
@@ -61,6 +61,15 @@ class LCD:
         with suppress(Exception):
             self._lcd.crlf()
 
+    def mostrar_estado_texto(self, texto: str) -> None:
+        """Escribe un texto personalizado en la segunda línea de la LCD."""
+        try:
+            # Sitúa el cursor al inicio de la segunda línea
+            self._lcd.cursor_pos = (1, 0)
+            # Escribe el texto (recorta o completa al ancho)
+            self._lcd.write_string(texto[: settings.LCD_COLS].ljust(settings.LCD_COLS))
+        except Exception:
+             _logger.exception("Error en mostrar_estado_texto(%r)", texto)
     def mostrar_bienvenida(self, sitio: str) -> None:
         """Muestra la versión, autor y nombre de sitio al arranque."""
         self.limpiar()
